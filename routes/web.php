@@ -22,8 +22,10 @@ Route::post('/addMovie', [App\Http\Controllers\MovieController::class, 'store'])
 
 Route::get('/movie', [App\Http\Controllers\MovieController::class, 'index'])->name('listMovies');
 Route::get('/movie/{movie}', [App\Http\Controllers\MovieController::class, 'show'])->name('showMovie');
+Route::post('/movie/{movie}/rating', [App\Http\Controllers\MovieController::class, 'rate'])->name('MovieAddRating');
 
 Route::get('/person/{person}', [App\Http\Controllers\PersonController::class, 'show'])->name('showPerson');
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

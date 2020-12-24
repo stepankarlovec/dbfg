@@ -33,11 +33,11 @@
             <h1 class="display-6 text-center">Nejnovější přidané:</h1>
             <ul class="list-group">
             @foreach($movies as $movie)
-                <li class="list-group-item text-center"><b><a href="/movie/{{ $movie->id }}">{{ $movie->name }}</a></b> - {{ $movie->release_date }}</li>
+                <li class="list-group-item text-center"><b><a href="/movie/{{ $movie->id }}">{{ $movie->name }}</a></b> - {{ $year = date('Y', strtotime($movie->release_date)) }}</li>
             @endforeach
             </ul>
             {{ $movies->links("pagination::bootstrap-4") }}
-            
+
         </div>
         <div class="col-md-4">
             <h1 class="display-6 text-center">Nejlépe hodnocené:</h1>
