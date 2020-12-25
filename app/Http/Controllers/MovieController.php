@@ -10,6 +10,7 @@ use App\Models\Movie;
 use App\Models\Person;
 use Illuminate\Support\Facades\Validator;
 use Image;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
@@ -124,53 +125,89 @@ class MovieController extends Controller
         return redirect()->route('home');
     }
     public function show(\App\Models\Movie $movie){
+        $rating = MovieRating::find($movie->id);
+
         $maxMovieId = Movie::max('id');
         $minMovieId = Movie::min('id');
+
         $castsDir = DB::table('casts')->where('movie', $movie->id)->where('role', 'režisér')->pluck('person');
         $personsDir = DB::table('persons')->whereIn('id', $castsDir)->get();
+
         $casts = DB::table('casts')->where('movie', $movie->id)->where('role', 'herec')->pluck('person');
         $persons = DB::table('persons')->whereIn('id', $casts)->get();
-        return view('movies.showMovie', compact('movie', 'persons', 'personsDir', 'maxMovieId', 'minMovieId'));
+
+        $getUsersRating = DB::table('ratings')->where('userId', auth()->user()->id)->where('movieId', $movie->id)->first();
+
+        return view('movies.showMovie', compact('movie', 'persons', 'personsDir', 'maxMovieId', 'minMovieId', 'rating', 'getUsersRating'));
     }
 
     public function rate(Request $request){
-        $rating = $request['rateNumber'];
-        $movieId = $request['movieId'];
-        $userId = auth()->user()->id;
-        // logika k vypočítání průměru, vynásobení ratu s počtem odpovědí, sečíst vše dohromady a vydělit celkovým počtem odpovědí.
-        Rating::create([
-            'rate' => $rating,
-            'movieId' => $movieId,
-            'userId' => $userId,
-        ]);
-        // potřebuji v DB nastavit primární klíč movieId a pak použít metodu ::find 24.12
-        $beforeRating = MovieRating::where('movieId', $movieId)->pluck('movieId');
-        switch ($rating){
-            case 1:
-                $beforeRating->star1 += 1;
-                break;
-            case 2:
-                $beforeRating->star2 += 1;
-                break;
-            case 3:
-                $beforeRating->star3 += 1;
-                break;
-            case 4:
-                $beforeRating->star4 += 1;
-                break;
-            case 5:
-                $beforeRating->star5 += 1;
-                break;
+        if(!Auth::check()){
+            redirect(route('login'));
+        }else {
+            $rating = $request['rateNumber'];
+            $movieId = $request['movieId'];
+            $userId = auth()->user()->id;
+            // logika k vypočítání průměru, vynásobení ratu s počtem odpovědí, sečíst vše dohromady a vydělit celkovým počtem odpovědí.
+                if($beforeRate = Rating::where('userId', $userId)->where('movieId', $movieId)->first()){
+                    $canSwitch = true;
+                }else{
+                    $canSwitch = false;
+                }
+            Rating::updateOrCreate(
+                ['movieId' => $movieId, 'userId' => $userId],
+                ['rate' => $rating]
+            );
+            // potřebuji v DB nastavit primární klíč movieId a pak použít metodu ::find 24.12
+            $beforeRating = MovieRating::find($movieId);
+            if($canSwitch==true) {
+                switch ($beforeRate->rate) {
+                    case 1:
+                        $beforeRating->star1 -= 1;
+                        break;
+                    case 2:
+                        $beforeRating->star2 -= 1;
+                        break;
+                    case 3:
+                        $beforeRating->star3 -= 1;
+                        break;
+                    case 4:
+                        $beforeRating->star4 -= 1;
+                        break;
+                    case 5:
+                        $beforeRating->star5 -= 1;
+                        break;
+                }
+            }
+            switch ($rating){
+                case 1:
+                    $beforeRating->star1 += 1;
+                    break;
+                case 2:
+                    $beforeRating->star2 += 1;
+                    break;
+                case 3:
+                    $beforeRating->star3 += 1;
+                    break;
+                case 4:
+                    $beforeRating->star4 += 1;
+                    break;
+                case 5:
+                    $beforeRating->star5 += 1;
+                    break;
+            }
+            $delitel = $beforeRating->star1+$beforeRating->star2+$beforeRating->star3+$beforeRating->star4+$beforeRating->star5;
+            $vypocet = ($beforeRating->star1*1+$beforeRating->star2*2+$beforeRating->star3*3+$beforeRating->star4*4+$beforeRating->star5*5)/$delitel;
+            MovieRating::where('movieId', $movieId)->update([
+                'average' => $vypocet,
+                'star1' => $beforeRating->star1,
+                'star2' => $beforeRating->star2,
+                'star3' => $beforeRating->star3,
+                'star4' => $beforeRating->star4,
+                'star5' => $beforeRating->star5,
+            ]);
         }
-        $delitel = $beforeRating->star1+$beforeRating->star2+$beforeRating->star3+$beforeRating->star4+$beforeRating->star5;
-        $vypocet = ($beforeRating->star1*1+$beforeRating->star2*2+$beforeRating->star3*3+$beforeRating->star4*4+$beforeRating->star5*5)/$delitel;
-        MovieRating::where('movieId', $movieId)->update([
-            'average' => $vypocet,
-            'star1' => $beforeRating->star1,
-            'star2' => $beforeRating->star2,
-            'star3' => $beforeRating->star3,
-            'star4' => $beforeRating->star4,
-            'star5' => $beforeRating->star5,
-        ]);
+
     }
+
 }

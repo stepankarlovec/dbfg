@@ -24,9 +24,9 @@
             </p>
             <p>
                 {!!  substr(strip_tags($movie->about), 0, 150) !!}
-                @if (strlen($movie->about) > 100)
+                @if (strlen($movie->about) > 150)
                     <span id="dots">...</span>
-                    <span id="more">{{ substr($movie->about, 100) }}</span>
+                    <span id="more">-{{ substr($movie->about, 150) }}</span>
                 @endif
                 <a href="#showMore" onclick="myFunction()" id="read">Zobrazit více</a>
             </p>
@@ -34,22 +34,29 @@
             <div class="row">
                 <div class="col-md-6">
                     <p>Hodnocení:</p>
+                    <!-- NEJSPÍŠ BUDU MUSET PŘIDAT VUE PÍČOVINY-->
+                    {{ $wantToRate = false }}
+                    @if($wantToRate==false)
+                        <p>Tvé hodnocení: {{ $getUsersRating->rate }} hvězdy/a</p>
+                        <a id="el" @click="newTitle">Změnit hodnocení</a>
+                    @else
                     <div class="rate">
                         <input type="radio" id="star5" name="rate" value="5" />
-                        <label for="star5" title="text">5 stars</label>
+                        <label for="star5" title="5 hvězd">5 stars</label>
                         <input type="radio" id="star4" name="rate" value="4" />
-                        <label for="star4" title="text">4 stars</label>
+                        <label for="star4" title="4 hvěždy">4 stars</label>
                         <input type="radio" id="star3" name="rate" value="3" />
-                        <label for="star3" title="text">3 stars</label>
+                        <label for="star3" title="3 hvězdy">3 stars</label>
                         <input type="radio" id="star2" name="rate" value="2" />
-                        <label for="star2" title="text">2 stars</label>
-                            <input type="radio" id="star1" name="rate" value="1" />
-                            <label for="star1" title="text">1 star</label>
+                        <label for="star2" title="2 hvězdy">2 stars</label>
+                        <input type="radio" id="star1" name="rate" value="1" />
+                        <label for="star1" title="1 hvězda">1 star</label>
                     </div>
+                        @endif
                 </div>
                 <div class="col-md-6">
-                    <h1>95%</h1>
-                    <p>156 hodnocení</p>
+                    <h1>{{ $rating->average * 20 }}%</h1>
+                    <p>{{ $pocetHlasu = $rating->star1+$rating->star2+$rating->star3+$rating->star4+$rating->star5 }} hodnocení</p>
 
                 </div>
             </div>
@@ -92,7 +99,9 @@
                         alert("Successfully rated..");
                     }
                 }
-            })
+            });
+            location.reload();
+            return false;
         });
         $("#star2").click(function(){
             let rating = 2;
@@ -108,7 +117,9 @@
                         alert("Successfully rated..");
                     }
                 }
-            })
+            });
+            location.reload();
+            return false;
         });
         $("#star3").click(function(){
             let rating = 3;
@@ -124,7 +135,9 @@
                         alert("Successfully rated..");
                     }
                 }
-            })
+            });
+            location.reload();
+            return false;
         });
         $("#star4").click(function(){
             let rating = 4;
@@ -137,10 +150,11 @@
                 },
                 success:function (response){
                     if(response){
-                        alert("Successfully rated..");
                     }
                 }
-            })
+            });
+            location.reload();
+            return false;
         });
         $("#star5").click(function(){
             let rating = 5;
@@ -153,12 +167,15 @@
                 },
                 success:function (response){
                     if(response){
-                        alert("Successfully rated..");
+
                     }
                 }
-            })
+            });
+            location.reload();
+            return false;
         });
-    });
+        });
+
 
 </script>
 <script src="{{ asset('js/movieView.js') }}"></script>

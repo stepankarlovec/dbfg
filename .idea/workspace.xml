@@ -4,11 +4,9 @@
     <list default="true" id="f8434ea7-b3ef-4dce-a103-d079fa4789ed" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MovieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MovieController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/movieView.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/movieView.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/movies/mainMovies.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/movies/mainMovies.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/MovieRating.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/MovieRating.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Rating.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Rating.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/movies/showMovie.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/movies/showMovie.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +179,8 @@
       <option name="presentableId" value="Default" />
       <updated>1608660692819</updated>
       <workItem from="1608660695212" duration="139000" />
-      <workItem from="1608745587364" duration="16595000" />
+      <workItem from="1608745587364" duration="16940000" />
+      <workItem from="1608818466433" duration="15367000" />
     </task>
     <servers />
   </component>
@@ -198,5 +197,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
