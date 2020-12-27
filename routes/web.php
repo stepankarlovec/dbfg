@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {return view('welcome'); });
+Route::get('/', function () {return view('welcome'); })->name('welcome');
 Auth::routes();
 
 Route::get('/addMovie', [App\Http\Controllers\MovieController::class, 'add'])->name('addMovie')->middleware('auth');
@@ -23,8 +23,11 @@ Route::post('/addMovie', [App\Http\Controllers\MovieController::class, 'store'])
 Route::get('/movie', [App\Http\Controllers\MovieController::class, 'index'])->name('listMovies');
 Route::get('/movie/{movie}', [App\Http\Controllers\MovieController::class, 'show'])->name('showMovie');
 Route::post('/movie/{movie}/rating', [App\Http\Controllers\MovieController::class, 'rate'])->name('MovieAddRating');
+Route::post('/movie/{movie}/comment', [App\Http\Controllers\MovieController::class, 'rate'])->name('addMovieComment');
+
 
 Route::get('/person/{person}', [App\Http\Controllers\PersonController::class, 'show'])->name('showPerson');
+
 
 
 

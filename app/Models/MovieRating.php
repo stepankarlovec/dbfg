@@ -7,16 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class MovieRating extends Model
 {
-    protected $primaryKey = 'movieId'; // or null
-
+    protected $primaryKey = 'movie_id';
     public $incrementing = false;
-
-    // In Laravel 6.0+ make sure to also set $keyType
     protected $keyType = 'integer';
 
     use HasFactory;
     protected $fillable = [
-        'movieId',
+        'movie_id',
         'average',
         'star1',
         'star2',
@@ -27,4 +24,8 @@ class MovieRating extends Model
     protected $hidden = [
         'created_at', 'updated_at',
     ];
+    public function movie()
+    {
+        return $this->belongsTo(Movie::class);
+    }
 }

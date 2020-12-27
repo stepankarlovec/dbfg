@@ -18,8 +18,13 @@ class Movie extends Model
         'actors',
         'about',
         'image',
+        'addedUser',
     ];
     protected $hidden = [
         'created_at', 'updated_at',
         ];
+    public function movieRating()
+    {
+        return $this->hasOne(MovieRating::class);
+    }
 }

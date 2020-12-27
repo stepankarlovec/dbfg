@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="f8434ea7-b3ef-4dce-a103-d079fa4789ed" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/errors/404.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MovieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MovieController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Movie.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Movie.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/MovieRating.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/MovieRating.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Rating.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Rating.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_19_222911_create_movies_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_19_222911_create_movies_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_24_013530_create_ratings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_24_013530_create_ratings_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_24_015418_create_movie_ratings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_24_015418_create_movie_ratings_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/movies/addMovie.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/movies/addMovie.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/movies/mainMovies.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/movies/mainMovies.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/movies/showMovie.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/movies/showMovie.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,6 +177,11 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\karlo\csfd\resources\views" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
@@ -180,7 +198,11 @@
       <updated>1608660692819</updated>
       <workItem from="1608660695212" duration="139000" />
       <workItem from="1608745587364" duration="16940000" />
-      <workItem from="1608818466433" duration="15367000" />
+      <workItem from="1608818466433" duration="15487000" />
+      <workItem from="1608919192258" duration="10439000" />
+      <workItem from="1609001963031" duration="13025000" />
+      <workItem from="1609032042185" duration="1561000" />
+      <workItem from="1609068281416" duration="5206000" />
     </task>
     <servers />
   </component>

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rating extends Model
 {
-    protected $primaryKey = 'movieId'; // or null
+    protected $primaryKey = 'movie_id'; // or null
 
     public $incrementing = false;
 
@@ -17,10 +17,14 @@ class Rating extends Model
     use HasFactory;
     protected $fillable = [
         'rate',
-        'movieId',
+        'movie_id',
         'userId',
     ];
     protected $hidden = [
         'created_at', 'updated_at',
     ];
+    public function phone()
+    {
+        return $this->hasOne(Phone::class);
+    }
 }

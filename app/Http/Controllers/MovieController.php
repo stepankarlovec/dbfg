@@ -16,9 +16,13 @@ use Illuminate\Support\Facades\DB;
 class MovieController extends Controller
 {
     public function index(){
-        // $movies = Movie::all()->paginate(5);
-        $movies = DB::table('movies')->orderBy('id', 'desc')->paginate(5);
-        return view('movies/mainMovies', compact('movies'));
+        $movies = Movie::orderByDesc('id')->paginate(5, ['*'], 'pL');
+        //$bestMoviesRatings = MovieRating::orderByDesc('average')->pluck('movie_id');
+        //return dd($bestMoviesRatings = MovieRating::orderByDesc('average')->pluck('movie_id'));
+        $bestRatedMovies = MovieRating::orderByDesc('average')->with('movie')->paginate(5, ['*'], 'pR');
+        //$bestRatedMovies = Movie::whereIn('id', $bestMoviesRatings)->sortByDesc()->with('movieRating')->get();
+        //return dd($bestRatedMovies = Movie::whereIn('id', $bestMoviesRatings)->orderBy('')->with('movieRating')->get());
+        return view('movies/mainMovies', compact('movies', 'bestRatedMovies'));
     }
     public function add(){
         return view('movies/addMovie');
@@ -26,12 +30,12 @@ class MovieController extends Controller
     public function store(Request $request){
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-            'genre' => ['required', 'string', 'max:255'],
+            'genre' => ['nullable','string', 'max:255'],
             'release_date' => ['required', 'date'],
-            'duration' => ['required', 'integer'],
-            'director' => ['required', 'string', 'max:255'],
-            'actors' => ['required', 'string', 'max:255'],
-            'about' => ['required', 'string'],
+            'duration' => ['nullable','integer'],
+            'director' => ['nullable','string', 'max:255'],
+            'actors' => ['nullable','string', 'max:255'],
+            'about' => ['nullable','string'],
             'image' => ['image'],
         ]);
         // Rozdělení herců do array
@@ -116,11 +120,23 @@ class MovieController extends Controller
                 'actors' => $request['actors'],
                 'about' => $request['about'],
                 'image' => $imagePath,
+                'addedUser' => auth()->user()->name,
         ]);
+        }else{
+            Movie::create([
+                'name' => $request['name'],
+                'genre' => $request['genre'],
+                'release_date' => $request['release_date'],
+                'duration' => $request['duration'],
+                'director' => $request['director'],
+                'actors' => $request['actors'],
+                'about' => $request['about'],
+                'addedUser' => 'admin',
+            ]);
         }
         $movieMaxId = Movie::max('id');
         MovieRating::create([
-            'movieId' => $movieMaxId,
+            'movie_id' => $movieMaxId,
         ]);
         return redirect()->route('home');
     }
@@ -136,7 +152,11 @@ class MovieController extends Controller
         $casts = DB::table('casts')->where('movie', $movie->id)->where('role', 'herec')->pluck('person');
         $persons = DB::table('persons')->whereIn('id', $casts)->get();
 
-        $getUsersRating = DB::table('ratings')->where('userId', auth()->user()->id)->where('movieId', $movie->id)->first();
+        if(Auth::check()){
+            $getUsersRating = DB::table('ratings')->where('userId', auth()->user()->id)->where('movie_id', $movie->id)->first();
+        }else{
+            $getUsersRating = "Pro hlasování se musíte přihlásit.";
+        }
 
         return view('movies.showMovie', compact('movie', 'persons', 'personsDir', 'maxMovieId', 'minMovieId', 'rating', 'getUsersRating'));
     }
@@ -146,20 +166,21 @@ class MovieController extends Controller
             redirect(route('login'));
         }else {
             $rating = $request['rateNumber'];
-            $movieId = $request['movieId'];
+            // nebere movie ID hmm... zkus změnit v ajaxu movie_id POROVNEJ z githubem ;) ;)
+            $movie_id = $request['movieId'];
             $userId = auth()->user()->id;
             // logika k vypočítání průměru, vynásobení ratu s počtem odpovědí, sečíst vše dohromady a vydělit celkovým počtem odpovědí.
-                if($beforeRate = Rating::where('userId', $userId)->where('movieId', $movieId)->first()){
+                if($beforeRate = Rating::where('userId', $userId)->where('movie_id', $movie_id)->first()){
                     $canSwitch = true;
                 }else{
                     $canSwitch = false;
                 }
             Rating::updateOrCreate(
-                ['movieId' => $movieId, 'userId' => $userId],
+                ['movie_id' => $movie_id, 'userId' => $userId],
                 ['rate' => $rating]
             );
-            // potřebuji v DB nastavit primární klíč movieId a pak použít metodu ::find 24.12
-            $beforeRating = MovieRating::find($movieId);
+            // potřebuji v DB nastavit primární klíč movie_id a pak použít metodu ::find 24.12
+            $beforeRating = MovieRating::find($movie_id);
             if($canSwitch==true) {
                 switch ($beforeRate->rate) {
                     case 1:
@@ -198,7 +219,7 @@ class MovieController extends Controller
             }
             $delitel = $beforeRating->star1+$beforeRating->star2+$beforeRating->star3+$beforeRating->star4+$beforeRating->star5;
             $vypocet = ($beforeRating->star1*1+$beforeRating->star2*2+$beforeRating->star3*3+$beforeRating->star4*4+$beforeRating->star5*5)/$delitel;
-            MovieRating::where('movieId', $movieId)->update([
+            MovieRating::where('movie_id', $movie_id)->update([
                 'average' => $vypocet,
                 'star1' => $beforeRating->star1,
                 'star2' => $beforeRating->star2,
