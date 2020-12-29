@@ -24,6 +24,7 @@ class CreateMoviesTable extends Migration
             $table->text('about')->nullable();
             $table->string('image')->default('profile/default.jpg');
             $table->string('addedUser')->default('admin');
+            $table->integer('validate')->default(0);
             $table->timestamps();
 
         });

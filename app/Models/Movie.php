@@ -21,7 +21,7 @@ class Movie extends Model
         'addedUser',
     ];
     protected $hidden = [
-        'created_at', 'updated_at',
+        'validate','created_at', 'updated_at',
         ];
     public function movieRating()
     {

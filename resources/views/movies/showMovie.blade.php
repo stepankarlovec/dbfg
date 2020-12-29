@@ -2,10 +2,17 @@
 
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<link href="{{ asset('css/movieView.css') }}" rel="stylesheet" >
+    <link href="{{ asset('css/movieView.css') }}" rel="stylesheet" >
 <div class="container">
     <div class="row">
         <div class="col-md-6">
+            @auth
+                @if(auth()->user()->admin==1)
+                    <a href="{{ route('editMovie', $movie->id) }}" class="text-secondary">edit</a> |
+                    <a href="{{ route('deleteMovie', $movie->id) }}" class="text-danger">delete</a>
+                @endif
+            @endauth
+
             <h1 class="display-4">{{ $movie->name }}</h1>
             <div class="d-flex">
                 <p class="">{{ $movie->genre }}</p>

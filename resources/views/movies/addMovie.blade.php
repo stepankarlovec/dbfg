@@ -9,7 +9,7 @@
         @csrf
         <div class="my-1">
             <label for="genre" class="ml-1">Název filmu: *</label>
-            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Pelíšky">
+            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name')}}" required autocomplete="name" autofocus placeholder="Pelíšky">
 
             @error('name')
             <span class="invalid-feedback" role="alert">

@@ -16,12 +16,10 @@ use Illuminate\Support\Facades\DB;
 class MovieController extends Controller
 {
     public function index(){
-        $movies = Movie::orderByDesc('id')->paginate(5, ['*'], 'pL');
-        //$bestMoviesRatings = MovieRating::orderByDesc('average')->pluck('movie_id');
-        //return dd($bestMoviesRatings = MovieRating::orderByDesc('average')->pluck('movie_id'));
-        $bestRatedMovies = MovieRating::orderByDesc('average')->with('movie')->paginate(5, ['*'], 'pR');
-        //$bestRatedMovies = Movie::whereIn('id', $bestMoviesRatings)->sortByDesc()->with('movieRating')->get();
-        //return dd($bestRatedMovies = Movie::whereIn('id', $bestMoviesRatings)->orderBy('')->with('movieRating')->get());
+        $movies = Movie::orderByDesc('id')->where('validate', 1)->paginate(5, ['*'], 'pL');
+        $bestRatedMovies = MovieRating::orderByDesc('average')->whereHas('movie', function ($query) {
+            return $query->where('validate', '=', 1);
+        })->paginate(5, ['*'], 'pR');
         return view('movies/mainMovies', compact('movies', 'bestRatedMovies'));
     }
     public function add(){
@@ -141,6 +139,9 @@ class MovieController extends Controller
         return redirect()->route('home');
     }
     public function show(\App\Models\Movie $movie){
+        if($movie->validate == 0){
+            abort(404);
+        }
         $rating = MovieRating::find($movie->id);
 
         $maxMovieId = Movie::max('id');

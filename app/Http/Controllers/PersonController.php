@@ -16,10 +16,13 @@ class PersonController extends Controller
         //     $movies = DB::table('movies')->where('id', '=', $casts[$i]->movie)->get();
         // }
         $casts = DB::table('casts')->where('person', $person->id)->pluck('movie');
-        $movies = DB::table('movies')->whereIn('id', $casts)->get();
+        $movies = DB::table('movies')->whereIn('id', $casts)->where('validate', 1)->get();
+        if(count($movies)==0){
+            abort(404);
+        }
         return view('person.showPerson', compact('person', 'movies'));
     }
     public function edit(){
-        
+
     }
 }

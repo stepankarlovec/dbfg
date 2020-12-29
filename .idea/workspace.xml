@@ -5,20 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8434ea7-b3ef-4dce-a103-d079fa4789ed" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/errors/404.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/adminView.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/approve.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/login.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/movies.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MovieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MovieController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PersonController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PersonController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Movie.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Movie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/MovieRating.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/MovieRating.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Rating.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Rating.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filesystems.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_19_222911_create_movies_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_19_222911_create_movies_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_24_013530_create_ratings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_24_013530_create_ratings_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_24_015418_create_movie_ratings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_24_015418_create_movie_ratings_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/movies/addMovie.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/movies/addMovie.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/movies/mainMovies.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/movies/mainMovies.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/movies/showMovie.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/movies/showMovie.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,8 +41,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="composer.json" />
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -157,16 +164,19 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1m1UfCvQqjKaghBek5DqoSfUhnm" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/storage/app/public/images" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -178,7 +188,11 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\karlo\csfd\storage\app\public\images" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\karlo\csfd\public\images" />
       <recent name="C:\Users\karlo\csfd\resources\views" />
     </key>
   </component>
@@ -202,7 +216,10 @@
       <workItem from="1608919192258" duration="10439000" />
       <workItem from="1609001963031" duration="13025000" />
       <workItem from="1609032042185" duration="1561000" />
-      <workItem from="1609068281416" duration="5206000" />
+      <workItem from="1609068281416" duration="10017000" />
+      <workItem from="1609110736011" duration="5083000" />
+      <workItem from="1609159354848" duration="5901000" />
+      <workItem from="1609184383535" duration="16202000" />
     </task>
     <servers />
   </component>
@@ -220,5 +237,8 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {return view('welcome'); })->name('welcome');
 Auth::routes();
 
+Route::get('/search/{search}', [App\Http\Controllers\SearchController::class, 'search'])->name('search');
+
 Route::get('/addMovie', [App\Http\Controllers\MovieController::class, 'add'])->name('addMovie')->middleware('auth');
 Route::post('/addMovie', [App\Http\Controllers\MovieController::class, 'store']);
 
@@ -27,7 +29,12 @@ Route::post('/movie/{movie}/comment', [App\Http\Controllers\MovieController::cla
 
 
 Route::get('/person/{person}', [App\Http\Controllers\PersonController::class, 'show'])->name('showPerson');
-
+Route::get('/admin/panel', [App\Http\Controllers\AdminController::class, 'index'])->name('indexAdmin')->middleware('admin');
+Route::get('/admin/{movie}/delete', [App\Http\Controllers\AdminController::class, 'delete'])->name('deleteMovie')->middleware('admin');
+Route::get('/admin/{movie}/edit', [App\Http\Controllers\AdminController::class, 'edit'])->name('editMovie')->middleware('admin');
+Route::patch('/admin/{movie}/edit', [App\Http\Controllers\AdminController::class, 'update'])->name('updateMovie')->middleware('admin');
+Route::get('/admin/approve', [App\Http\Controllers\AdminController::class, 'approve'])->name('adminApprove')->middleware('admin');
+Route::get('/admin/{movie}/approve', [App\Http\Controllers\AdminController::class, 'approveMovie'])->name('adminApproveMovie')->middleware('admin');
 
 
 

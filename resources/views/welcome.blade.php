@@ -7,8 +7,9 @@
     <a href="{{ route('login') }}">login</a><br>
     <a href="{{ route('register') }}">register</a><br>
     <a href="{{ route('addMovie') }}">add movie</a><br>
-    <a href="{{ route('listMovies') }}">úvodní stránka</a>
-</div>    
+    <a href="{{ route('listMovies') }}">úvodní stránka</a><br>
+    <a href="{{ route('indexAdmin') }}">administrace</a>
+</div>
 </body>
 @endsection
 

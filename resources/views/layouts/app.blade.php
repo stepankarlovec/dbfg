@@ -18,6 +18,26 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style type="text/css">
+        .form-control-xs {
+            height: 30px;
+            width: 70%;
+            font-size: 14px;
+            border-bottom-right-radius: 0px;
+            border-top-right-radius: 0px;
+        }
+        .mybtn{
+            height: 30px;
+            width: 14%;
+            font-size: 14px;
+            background-image: url("{{asset('images/search.svg')}}");
+            background-repeat: no-repeat;
+            background-color: #8bd72f;
+            border-bottom-right-radius: 5px;
+            border-top-right-radius: 5px;
+            border: 0px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -33,7 +53,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <form method="get" action="{{ route('search') }}">
+                            @csrf
+                            <div class="d-flex">
+                                <input type="text" name="searchContent" class="hledat form-control-xs form-control " placeholder="Hledat">
+                                <input type="submit" class="mybtn" value="">
+                            </div>
+                        </form>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -45,7 +71,7 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-                            
+
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
