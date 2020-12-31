@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cast;
+use App\Models\Comment;
 use App\Models\Rating;
 use App\Models\MovieRating;
 use Illuminate\Http\Request;
@@ -144,6 +145,8 @@ class MovieController extends Controller
         }
         $rating = MovieRating::find($movie->id);
 
+        $comments = Comment::where('movie_id', $movie->id)->orderBy('rating', 'DESC')->with('user')->paginate(6);
+
         $maxMovieId = Movie::max('id');
         $minMovieId = Movie::min('id');
 
@@ -154,12 +157,13 @@ class MovieController extends Controller
         $persons = DB::table('persons')->whereIn('id', $casts)->get();
 
         if(Auth::check()){
+            $commentExists = Comment::where(['movie_id' => $movie->id, 'user_id' => auth()->user()->id])->first();
             $getUsersRating = DB::table('ratings')->where('userId', auth()->user()->id)->where('movie_id', $movie->id)->first();
         }else{
             $getUsersRating = "Pro hlasování se musíte přihlásit.";
         }
 
-        return view('movies.showMovie', compact('movie', 'persons', 'personsDir', 'maxMovieId', 'minMovieId', 'rating', 'getUsersRating'));
+        return view('movies.showMovie', compact('movie', 'persons', 'personsDir', 'comments', 'maxMovieId', 'minMovieId', 'rating', 'getUsersRating', 'commentExists'));
     }
 
     public function rate(Request $request){

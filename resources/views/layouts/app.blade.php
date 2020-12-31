@@ -56,7 +56,7 @@
                         <form method="get" action="{{ route('search') }}">
                             @csrf
                             <div class="d-flex">
-                                <input type="text" name="searchContent" class="hledat form-control-xs form-control " placeholder="Hledat">
+                                <input type="text" name="search" class="hledat form-control-xs form-control " placeholder="Hledat">
                                 <input type="submit" class="mybtn" value="">
                             </div>
                         </form>

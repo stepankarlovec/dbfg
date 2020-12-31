@@ -100,15 +100,48 @@
     <div class="row">
         <div class="col-md-6">Přidal <a>{{$movie->addedUser}}</a></div>
     </div>
-<div class="row pt-5">
+    <div class="row pt-2">
+    @auth
+        @if(!isset($commentExists))
+        <div class="col-md-12">
+            <hr></hr>
+                <div class="row">
+                <div class="col-md-6">
+            <h1>Přidat komentář:</h1>
+            <form method="post" action="{{ route('addComment', $movie->id) }}">
+                @csrf
+                <textarea name="comment" class="form-control" placeholder="Zanechte váš názor.." rows="3"></textarea>
+                <input type="submit" class="btn btn-success mt-1">
+            </form>
+                </div>
+                </div>
+        </div>
+            @endif
+            @endauth
     <div class="col-md-12">
-        @auth
-        <h1>Přidat komentář:</h1>
-        <form method="post" class="col-md-6" action="{{ route('addMovieComment', $movie->id) }}">
-
-
-        </form>
-        @endauth
+        <hr></hr>
+        <h1 class="display-6">Komentáře:</h1>
+        @if(count($comments)>0)
+        @foreach($comments as $comment)
+            <div class="d-inline-flex">
+                <a class="font-weight-bolder commentName pb-1" href="/profile/{{ $comment->user->id }}">{{ $comment->user->name }}</a>
+                <div class="pl-2 paddingT3">{{ \App\Models\Rating::where('userId', $comment->user->id)->where('movie_id', $movie->id)->value('rate') }} hvězd/y</div>
+                <div class="pl-1">
+                    <button id="likeComment{{$comment->id}}" class="thumbbutton" type="submit">👍</button>
+                    <button id="dislikeComment{{$comment->id}}" class="thumbbutton" type="submit">👎</button>
+                </div>
+                @auth
+                    @can('update', $comment)
+                        <div class="paddingT3 pl-2">
+                            <a href="{{ route('editComment', $movie->id) }}" class="text-dark">Upravit</a>
+                            <a href="{{ route('deleteComment', $movie->id) }}" class="text-danger pl-2">Odstranit</a>
+                        </div>
+                    @endif
+                @endauth
+            </div>
+                <p>{{ $comment->content }}</p>
+        @endforeach
+        @endif
     </div>
 </div>
     </div>
@@ -121,6 +154,44 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        @if(count($comments)>0)
+            @foreach($comments as $comment)
+        $("#likeComment{{$comment->id}}").click(function(){
+            $.ajax({
+                url: "{{ route('likeComment', $comment->id) }}",
+                type:"POST",
+                data:{
+                    likeOrDis:1,
+                    comment_id:{{$comment->id}},
+                    movie_id:{{$movie->id}},
+                },
+                success:function (response){
+                    if(response){
+                    }
+                }
+            });
+            location.reload();
+            return false;
+        });
+        $("#dislikeComment{{$comment->id}}").click(function(){
+            $.ajax({
+                url: "{{ route('likeComment', $comment->id) }}",
+                type:"POST",
+                data:{
+                    likeOrDis:0,
+                    comment_id:{{$comment->id}},
+                    movie_id:{{$movie->id}},
+                },
+                success:function (response){
+                    if(response){
+                    }
+                }
+            });
+            location.reload();
+            return false;
+        });
+        @endforeach
+        @endif
         $("#star1").click(function(){
             let rating = 1;
             $.ajax({

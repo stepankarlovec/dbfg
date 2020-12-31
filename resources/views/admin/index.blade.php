@@ -11,10 +11,8 @@
             <div class="list-group list-group-flush">
                 <a href="{{ route('indexAdmin') }}" class="list-group-item list-group-item-action bg-dark text-white">Domů</a>
                 <a href="{{ route('adminApprove') }}" class="list-group-item list-group-item-action bg-dark text-white">Ke schválení</a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">Uživatelé</a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">Events</a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">Profile</a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">Status</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">Admini</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">Log</a>
             </div>
         </div>
         @yield('AdminContent')

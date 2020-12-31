@@ -35,3 +35,14 @@
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
 }
+.thumbbutton{
+    border: 0;
+    background-color: inherit;
+}
+.commentName{
+    font-size: 110%;
+    padding-top: 1px;
+}
+.paddingT3{
+    padding-top: 3px;
+}
