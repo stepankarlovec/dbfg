@@ -119,7 +119,7 @@ class MovieController extends Controller
                 'actors' => $request['actors'],
                 'about' => $request['about'],
                 'image' => $imagePath,
-                'addedUser' => auth()->user()->name,
+                'addedUser' => auth()->user()->id,
         ]);
         }else{
             Movie::create([
@@ -158,9 +158,10 @@ class MovieController extends Controller
 
         if(Auth::check()){
             $commentExists = Comment::where(['movie_id' => $movie->id, 'user_id' => auth()->user()->id])->first();
-            $getUsersRating = DB::table('ratings')->where('userId', auth()->user()->id)->where('movie_id', $movie->id)->first();
+            $getUsersRating = DB::table('ratings')->where('user_id', auth()->user()->id)->where('movie_id', $movie->id)->first();
         }else{
             $getUsersRating = "Pro hlasování se musíte přihlásit.";
+            $commentExists = 0;
         }
 
         return view('movies.showMovie', compact('movie', 'persons', 'personsDir', 'comments', 'maxMovieId', 'minMovieId', 'rating', 'getUsersRating', 'commentExists'));
@@ -175,13 +176,13 @@ class MovieController extends Controller
             $movie_id = $request['movieId'];
             $userId = auth()->user()->id;
             // logika k vypočítání průměru, vynásobení ratu s počtem odpovědí, sečíst vše dohromady a vydělit celkovým počtem odpovědí.
-                if($beforeRate = Rating::where('userId', $userId)->where('movie_id', $movie_id)->first()){
+                if($beforeRate = Rating::where('user_id', $userId)->where('movie_id', $movie_id)->first()){
                     $canSwitch = true;
                 }else{
                     $canSwitch = false;
                 }
             Rating::updateOrCreate(
-                ['movie_id' => $movie_id, 'userId' => $userId],
+                ['movie_id' => $movie_id, 'user_id' => $userId],
                 ['rate' => $rating]
             );
             // potřebuji v DB nastavit primární klíč movie_id a pak použít metodu ::find 24.12

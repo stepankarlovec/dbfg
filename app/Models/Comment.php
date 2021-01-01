@@ -23,8 +23,11 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function CommentRating()
+    public function commentRating()
     {
         return $this->hasMany(CommentRating::class);
+    }
+    public function movie(){
+        return $this->belongsTo(Movie::class);
     }
 }

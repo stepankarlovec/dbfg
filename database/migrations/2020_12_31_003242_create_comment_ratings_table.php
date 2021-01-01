@@ -15,12 +15,13 @@ class CreateCommentRatingsTable extends Migration
     {
         Schema::create('comment_ratings', function (Blueprint $table) {
             $table->id();
-            $table->integer('comment_id')->index()->unique();
+            $table->integer('comment_id')->index();
             $table->integer('user_id');
             $table->integer('value');
             $table->timestamps();
 
             $table->foreign('comment_id')->references('id')->on('comments');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

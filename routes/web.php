@@ -30,6 +30,16 @@ Route::patch('/comment/{movie}/edit', [App\Http\Controllers\CommentController::c
 Route::get('/comment/{movie}/delete', [App\Http\Controllers\CommentController::class, 'delete'])->name('deleteComment')->middleware('auth');;
 Route::post('/commentLike/{comment}', [App\Http\Controllers\CommentController::class, 'like'])->name('likeComment')->middleware('auth');;
 
+Route::get('/profile/{profile}', [App\Http\Controllers\ProfileController::class, 'show'])->name('showProfile')->middleware('auth');
+Route::get('/profile/{profile}/rated', [App\Http\Controllers\ProfileController::class, 'rated'])->name('showRated')->middleware('auth');
+Route::get('/profile/{profile}/comments', [App\Http\Controllers\ProfileController::class, 'comments'])->name('showComments')->middleware('auth');
+Route::get('/profile/{profile}/reactions', [App\Http\Controllers\ProfileController::class, 'reactions'])->name('showReactions')->middleware('auth');
+Route::get('/profile/{profile}/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('editProfile')->middleware('auth');
+Route::patch('/profile/{profile}/edit', [App\Http\Controllers\ProfileController::class, 'editPatch'])->name('editProfilePatch')->middleware('auth');
+
+
+Route::get('/profile/{profile}/favourite', [App\Http\Controllers\ProfileController::class, '#'])->name('#')->middleware('auth');
+
 
 Route::get('/person/{person}', [App\Http\Controllers\PersonController::class, 'show'])->name('showPerson');
 

@@ -19,9 +19,9 @@
                 <h1 class="display-6">Uživatelé:</h1>
                 <ul class="list-group">
                     @foreach($users as $user)
-                        <li class="list-group-item bg-dark"><b><a href="/movie/{{ $user->id }}">{{ $user->name }}</a></b>
-                            <a href="{{ route('adminApproveMovie', $user->id) }}" class="btn-sm btn btn-warning ml-3">Ban</a>
-                            <a href="{{ route('deleteMovie', $user->id) }}" class="btn-sm btn btn-danger">Delete</a>
+                        <li class="list-group-item bg-dark"><b><a href="/profile/{{ $user->id }}">{{ $user->name }}</a></b>
+                            <a href="#" class="btn-sm btn btn-warning ml-3">Ban</a>
+                            <a href="#" class="btn-sm btn btn-danger">Delete</a>
                         </li>
                     @endforeach
                 </ul>

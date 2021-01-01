@@ -28,4 +28,7 @@ class MovieRating extends Model
     {
         return $this->belongsTo(Movie::class);
     }
+    public function ratings(){
+        return $this->hasMany(Rating::class);
+    }
 }

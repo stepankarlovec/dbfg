@@ -102,7 +102,7 @@
     </div>
     <div class="row pt-2">
     @auth
-        @if(!isset($commentExists))
+        @if(!isset($commentExists) && isset($getUsersRating->rate))
         <div class="col-md-12">
             <hr></hr>
                 <div class="row">
@@ -125,7 +125,7 @@
         @foreach($comments as $comment)
             <div class="d-inline-flex">
                 <a class="font-weight-bolder commentName pb-1" href="/profile/{{ $comment->user->id }}">{{ $comment->user->name }}</a>
-                <div class="pl-2 paddingT3">{{ \App\Models\Rating::where('userId', $comment->user->id)->where('movie_id', $movie->id)->value('rate') }} hvězd/y</div>
+                <div class="pl-2 paddingT3">{{ $comment->user->ratings->where('movie_id', $movie->id)->first()->rate }} hvězd/y</div>
                 <div class="pl-1">
                     <button id="likeComment{{$comment->id}}" class="thumbbutton" type="submit">👍</button>
                     <button id="dislikeComment{{$comment->id}}" class="thumbbutton" type="submit">👎</button>

@@ -15,7 +15,7 @@ class CreateMovieRatingsTable extends Migration
     {
         Schema::create('movie_ratings', function (Blueprint $table) {
             $table->id();
-            $table->integer('movie_id')->index()->unique();
+            $table->integer('movie_id')->unique();
             $table->integer('average')->default(0);
             $table->integer('star1')->default(0);
             $table->integer('star2')->default(0);
@@ -24,7 +24,7 @@ class CreateMovieRatingsTable extends Migration
             $table->integer('star5')->default(0);
             $table->timestamps();
 
-            $table->foreign('movie_id')->references('id')->on('movies');
+            $table->index('movie_id');
         });
     }
 

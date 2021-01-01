@@ -36,29 +36,26 @@ class CommentController extends Controller
     }
     public function like(Request $request){
         if($request['likeOrDis']==1){
+            CommentRating::updateOrCreate(
+                ['comment_id' => $request['comment_id'], 'user_id' => auth()->user()->id],
+                ['value' => 1]
+            );
             $allComRatings = CommentRating::where('comment_id', $request['comment_id'])->get();
             $celkovyRating = 0;
             foreach ($allComRatings as $acr) {
                 $celkovyRating += $acr->value;
             }
-            $celkovyRating += 1;
-            CommentRating::updateOrCreate(
-                ['comment_id' => $request['comment_id'], 'user_id' => auth()->user()->id],
-                ['value' => $celkovyRating]
-            );
-            Comment::where('id', $request['comment_id'])->update(['rating' => $celkovyRating]);
             Comment::where('id', $request['comment_id'])->update(['rating' => $celkovyRating]);
         }elseif($request['likeOrDis']==0){
+            CommentRating::updateOrCreate(
+                ['comment_id' => $request['comment_id'], 'user_id' => auth()->user()->id],
+                ['value' => -1]
+            );
             $allComRatings = CommentRating::where('comment_id', $request['comment_id'])->get();
             $celkovyRating = 0;
             foreach ($allComRatings as $acr) {
                 $celkovyRating += $acr->value;
             }
-            $celkovyRating += -1;
-            CommentRating::updateOrCreate(
-                ['comment_id' => $request['comment_id'], 'user_id' => auth()->user()->id],
-                ['value' => $celkovyRating]
-            );
             Comment::where('id', $request['comment_id'])->update(['rating' => $celkovyRating]);
         }
     }

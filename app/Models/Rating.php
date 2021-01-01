@@ -7,20 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rating extends Model
 {
-    protected $primaryKey = 'movie_id'; // or null
-
-    public $incrementing = false;
-
-    // In Laravel 6.0+ make sure to also set $keyType
-    protected $keyType = 'integer';
-
     use HasFactory;
     protected $fillable = [
         'rate',
         'movie_id',
-        'userId',
+        'user_id',
     ];
     protected $hidden = [
         'created_at', 'updated_at',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public function movie(){
+        return $this->belongsTo(Movie::class);
+    }
+    public function movieRating(){
+        return $this->belongsTo(MovieRating::class);
+    }
 }
