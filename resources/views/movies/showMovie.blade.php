@@ -77,7 +77,7 @@
                     @endguest
                 </div>
                 <div class="col-md-6">
-                    <h1>{{ $rating->average * 20 }}%</h1>
+                    <h1>{{ round($rating->average * 20) }}%</h1>
                     <p>{{ $pocetHlasu = $rating->star1+$rating->star2+$rating->star3+$rating->star4+$rating->star5 }} hodnocení</p>
 
                 </div>
@@ -98,7 +98,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">Přidal <a>{{$movie->addedUser}}</a></div>
+        <div class="col-md-6">Přidal <a href="{{ route('showProfile', \App\Models\User::find($movie->addedUser)->id) }}">{{ \App\Models\User::find($movie->addedUser)->name }}</a></div>
     </div>
     <div class="row pt-2">
     @auth

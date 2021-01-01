@@ -38,8 +38,8 @@ class MovieController extends Controller
             'image' => ['image'],
         ]);
         // Rozdělení herců do array
-        $imageArr=explode(",",$request['actors']);
-        $directorArr=explode(",",$request['director']);
+        $imageArr=explode(", ",$request['actors']);
+        $directorArr=explode(", ",$request['director']);
 
         // DIRECTOR EXISTS
         $directorExists = DB::table('persons')->whereIn('name', $directorArr)->get();

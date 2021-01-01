@@ -62,8 +62,7 @@
         </div>
         <div class="my-1">
             <label for="genre" class="ml-1">Hlavní herci:</label>
-            <input id="actors" type="text" class="form-control @error('actors') is-invalid @enderror" name="actors" value="{{ old('actors') }}"  autocomplete="actors" autofocus placeholder="Miroslav Donutil,Jiří Kodet,Simona Stašová,Emília Vášáryová,Bolek Polívka">
-
+            <input id="actors" type="text" class="form-control @error('actors') is-invalid @enderror" name="actors" value="{{ old('actors') }}"  autocomplete="actors" autofocus placeholder="Miroslav Donutil, Jiří Kodet, Simona Stašová, Emília Vášáryová, Bolek Polívka">
             @error('actors')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -102,7 +101,7 @@
     <div class="col-md-6">
         <h1>Přidávání filmů</h1>
         <p>Chtěli by jste na DBFG přidat nový film? Můžete si o něj požádat v tomto formuláři. Stačí zadat název filmu, datum vydání a vaši prosbu zaregistrujeme. Pokud nám ovšem chcete ulehčit práci, můžete informace o filmu předvyplnit - film se na DBFG dostane dřív a pod filmem dostanete speciální poděkování za přidání filmu.</p>
-        <p>- Předvyplněný text slouží jako ukázka.<br>- Jména musí být oddělena čárkou bez mezery jako tomu je v ukázce!</p>
+        <p>- Předvyplněný text slouží jako ukázka.<br>- Jména musí být oddělena čárkou s mezerou jako tomu je v ukázce!</p>
         <p>Formulář se po odeslání pošle ke schválení. Pokud film projde začne se zobrazovat na stránce.</p>
     </div>
 </div>

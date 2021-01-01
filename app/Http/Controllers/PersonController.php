@@ -22,7 +22,7 @@ class PersonController extends Controller
         }
         return view('person.showPerson', compact('person', 'movies'));
     }
-    public function edit(){
+    public function edit(\App\Models\Person $person){
 
     }
 }

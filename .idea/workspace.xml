@@ -5,33 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8434ea7-b3ef-4dce-a103-d079fa4789ed" name="Default Changelist" comment="Administrace, začátek SearchController.php">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ProfileController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Profile.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Policies/ProfilePolicy.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_12_31_123933_create_profiles_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/profile/comments.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/profile/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/profile/ratings.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/profile/reactions.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/profile/show.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/profile/userMenu.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/FavoriteMovieController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/FavoriteMovie.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_01_01_205108_create_favorite_movies_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MovieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MovieController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Comment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/CommentRating.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/CommentRating.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Movie.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Movie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/MovieRating.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/MovieRating.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Rating.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Rating.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_24_013530_create_ratings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_24_013530_create_ratings_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_24_015418_create_movie_ratings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_24_015418_create_movie_ratings_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_30_020222_create_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_30_020222_create_comments_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_31_003242_create_comment_ratings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_31_003242_create_comment_ratings_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/movies.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/movies.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/movies/addMovie.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/movies/addMovie.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/movies/mainMovies.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/movies/mainMovies.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/movies/showMovie.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/movies/showMovie.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,7 +216,7 @@
       <workItem from="1609265406781" duration="6205000" />
       <workItem from="1609330669891" duration="15047000" />
       <workItem from="1609413347054" duration="9948000" />
-      <workItem from="1609504882908" duration="9807000" />
+      <workItem from="1609504882908" duration="13261000" />
     </task>
     <task id="LOCAL-00001" summary="Administrace, začátek SearchController.php">
       <created>1609203578103</created>
