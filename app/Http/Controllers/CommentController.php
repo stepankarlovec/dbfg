@@ -12,9 +12,12 @@ class CommentController extends Controller
 {
     public function index(Movie $movie, Request $request){
         $comment = $request['comment'];
+        $myUser = auth()->user();
         Comment::create(
-            ['movie_id' => $movie->id, 'user_id' => auth()->user()->id, 'content' => $comment],
+            ['movie_id' => $movie->id, 'user_id' => $myUser->id, 'content' => $comment],
         );
+        $myUser->points = $myUser->points + 6;
+        $myUser->save();
         return redirect(route('showMovie', $movie->id));
     }
     public function edit(Movie $movie){

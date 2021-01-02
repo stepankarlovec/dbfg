@@ -34,22 +34,28 @@ Route::get('/profile/{profile}', [App\Http\Controllers\ProfileController::class,
 Route::get('/profile/{profile}/rated', [App\Http\Controllers\ProfileController::class, 'rated'])->name('showRated')->middleware('auth');
 Route::get('/profile/{profile}/comments', [App\Http\Controllers\ProfileController::class, 'comments'])->name('showComments')->middleware('auth');
 Route::get('/profile/{profile}/reactions', [App\Http\Controllers\ProfileController::class, 'reactions'])->name('showReactions')->middleware('auth');
+Route::get('/profile/{profile}/favorite', [App\Http\Controllers\ProfileController::class, 'favorite'])->name('showFavorite')->middleware('auth');
+
+
 Route::get('/profile/{profile}/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('editProfile')->middleware('auth');
 Route::patch('/profile/{profile}/edit', [App\Http\Controllers\ProfileController::class, 'editPatch'])->name('editProfilePatch')->middleware('auth');
 
+Route::get('/movie/{movie}/favorite', [App\Http\Controllers\MovieController::class, 'favorite'])->name('movieFavorite');
 
-Route::get('/profile/{profile}/favourite', [App\Http\Controllers\ProfileController::class, '#'])->name('#')->middleware('auth');
+
 
 
 Route::get('/person/{person}', [App\Http\Controllers\PersonController::class, 'show'])->name('showPerson');
+Route::get('/person/{person}/edit', [App\Http\Controllers\PersonController::class, 'edit'])->name('editPerson');
+Route::patch('/person/{person}/edit', [App\Http\Controllers\PersonController::class, 'editPatch'])->name('editPatchPerson');
 
-Route::get('/admin/panel', [App\Http\Controllers\AdminController::class, 'index'])->name('indexAdmin')->middleware('admin');
-Route::get('/admin/{movie}/delete', [App\Http\Controllers\AdminController::class, 'delete'])->name('deleteMovie')->middleware('admin');
-Route::get('/admin/{movie}/edit', [App\Http\Controllers\AdminController::class, 'edit'])->name('editMovie')->middleware('admin');
-Route::patch('/admin/{movie}/edit', [App\Http\Controllers\AdminController::class, 'update'])->name('updateMovie')->middleware('admin');
-Route::get('/admin/approve', [App\Http\Controllers\AdminController::class, 'approve'])->name('adminApprove')->middleware('admin');
-Route::get('/admin/{movie}/approve', [App\Http\Controllers\AdminController::class, 'approveMovie'])->name('adminApproveMovie')->middleware('admin');
-Route::get('/admin/addAdmin', [App\Http\Controllers\AdminController::class, 'index'])->name('indexAdmin')->middleware('admin');
+
+Route::get('/admin/panel', [App\Http\Controllers\AdminController::class, 'index'])->name('indexAdmin')->middleware('auth', 'admin');
+Route::get('/admin/{movie}/delete', [App\Http\Controllers\AdminController::class, 'delete'])->name('deleteMovie')->middleware('auth', 'admin');
+Route::get('/admin/{movie}/edit', [App\Http\Controllers\AdminController::class, 'edit'])->name('editMovie')->middleware('auth', 'admin');
+Route::patch('/admin/{movie}/edit', [App\Http\Controllers\AdminController::class, 'update'])->name('updateMovie')->middleware('auth', 'admin');
+Route::get('/admin/approve', [App\Http\Controllers\AdminController::class, 'approve'])->name('adminApprove')->middleware('auth', 'admin');
+Route::get('/admin/{movie}/approve', [App\Http\Controllers\AdminController::class, 'approveMovie'])->name('adminApproveMovie')->middleware('auth', 'admin');
 
 
 

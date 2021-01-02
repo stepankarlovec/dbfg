@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Cast;
 use App\Models\Comment;
+use App\Models\FavoriteMovie;
 use App\Models\Rating;
 use App\Models\MovieRating;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Models\Person;
@@ -21,7 +23,8 @@ class MovieController extends Controller
         $bestRatedMovies = MovieRating::orderByDesc('average')->whereHas('movie', function ($query) {
             return $query->where('validate', '=', 1);
         })->paginate(5, ['*'], 'pR');
-        return view('movies/mainMovies', compact('movies', 'bestRatedMovies'));
+        $bestUsers = User::orderByDesc('points')->paginate(5, ['*'], 'bU');
+        return view('movies/mainMovies', compact('movies', 'bestRatedMovies', 'bestUsers'));
     }
     public function add(){
         return view('movies/addMovie');
@@ -104,7 +107,15 @@ class MovieController extends Controller
             ]);
         }
 
+        $addedUser = 0;
         // Image zpracování a Movie create
+        if ($request['genre']!=null & $request['duration']!=null & $request['director']!=null & $request['actors']!=null & $request['about']!=null & $request['image']!=null){
+            $goodUser = User::find(\auth()->user()->id);
+            $newPoints = $goodUser->points + 50;
+            $goodUser->points = $newPoints;
+            $goodUser->save();
+            $addedUser = $goodUser->id;
+        }
         if(request('image')){
             $imagePath = request('image')->store('profile', 'public');
             // Image error - its working VScode is just stoopid.
@@ -119,7 +130,7 @@ class MovieController extends Controller
                 'actors' => $request['actors'],
                 'about' => $request['about'],
                 'image' => $imagePath,
-                'addedUser' => auth()->user()->id,
+                'addedUser' => $addedUser,
         ]);
         }else{
             Movie::create([
@@ -130,7 +141,7 @@ class MovieController extends Controller
                 'director' => $request['director'],
                 'actors' => $request['actors'],
                 'about' => $request['about'],
-                'addedUser' => 'admin',
+                'addedUser' => $addedUser,
             ]);
         }
         $movieMaxId = Movie::max('id');
@@ -155,8 +166,9 @@ class MovieController extends Controller
 
         $casts = DB::table('casts')->where('movie', $movie->id)->where('role', 'herec')->pluck('person');
         $persons = DB::table('persons')->whereIn('id', $casts)->get();
-
+        $movieIsFavorite = null;
         if(Auth::check()){
+            $movieIsFavorite = FavoriteMovie::where(['movie_id' => $movie->id, 'user_id' => auth()->user()->id])->first();
             $commentExists = Comment::where(['movie_id' => $movie->id, 'user_id' => auth()->user()->id])->first();
             $getUsersRating = DB::table('ratings')->where('user_id', auth()->user()->id)->where('movie_id', $movie->id)->first();
         }else{
@@ -164,7 +176,7 @@ class MovieController extends Controller
             $commentExists = 0;
         }
 
-        return view('movies.showMovie', compact('movie', 'persons', 'personsDir', 'comments', 'maxMovieId', 'minMovieId', 'rating', 'getUsersRating', 'commentExists'));
+        return view('movies.showMovie', compact('movie', 'persons', 'personsDir', 'comments', 'maxMovieId', 'minMovieId', 'rating', 'getUsersRating', 'commentExists', 'movieIsFavorite'));
     }
 
     public function rate(Request $request){
@@ -174,15 +186,15 @@ class MovieController extends Controller
             $rating = $request['rateNumber'];
             // nebere movie ID hmm... zkus změnit v ajaxu movie_id POROVNEJ z githubem ;) ;)
             $movie_id = $request['movieId'];
-            $userId = auth()->user()->id;
+            $userId = auth()->user();
             // logika k vypočítání průměru, vynásobení ratu s počtem odpovědí, sečíst vše dohromady a vydělit celkovým počtem odpovědí.
-                if($beforeRate = Rating::where('user_id', $userId)->where('movie_id', $movie_id)->first()){
+                if($beforeRate = Rating::where('user_id', $userId->id)->where('movie_id', $movie_id)->first()){
                     $canSwitch = true;
                 }else{
                     $canSwitch = false;
                 }
             Rating::updateOrCreate(
-                ['movie_id' => $movie_id, 'user_id' => $userId],
+                ['movie_id' => $movie_id, 'user_id' => $userId->id],
                 ['rate' => $rating]
             );
             // potřebuji v DB nastavit primární klíč movie_id a pak použít metodu ::find 24.12
@@ -233,8 +245,18 @@ class MovieController extends Controller
                 'star4' => $beforeRating->star4,
                 'star5' => $beforeRating->star5,
             ]);
+            $userId->points = $userId->points + 1;
+            $userId->save();
         }
 
+    }
+    public function favorite(Movie $movie){
+        $result = FavoriteMovie::where(['movie_id' => $movie->id, 'user_id' => auth()->user()->id])->first();
+        if($result === null || !$result){
+            FavoriteMovie::create(['movie_id' => $movie->id, 'user_id' => auth()->user()->id]);
+        }else{
+            FavoriteMovie::where(['movie_id' => $movie->id, 'user_id' => auth()->user()->id])->first()->delete();
+        }
     }
 
 }

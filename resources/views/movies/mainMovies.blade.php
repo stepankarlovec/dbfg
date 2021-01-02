@@ -49,9 +49,11 @@
             {{ $bestRatedMovies->onEachSide(1)->links("pagination::bootstrap-4") }}
         </div>
         <div class="col-md-4">
-            <h1 class="display-6 text-center">Náš výběr:</h1>
+            <h1 class="display-6 text-center">Nejlepší uživatelé:</h1>
             <ul class="list-group">
-                <li class="list-group-item text-center"><b>Tři oříšky pro popelku</b> - 2020</li>
+                 @foreach($bestUsers as $bestUser)
+                    <li class="list-group-item text-center"><b><a href="/profile/{{ $bestUser->id }}">{{ $bestUser->name }}</a></b> ({{ $bestUser->points }} bodů)</li>
+                @endforeach
             </ul>
         </div>
         </div>

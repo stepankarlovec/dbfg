@@ -46,3 +46,12 @@
 .paddingT3{
     padding-top: 3px;
 }
+#favoriteButton, #favoriteButton:active
+{
+    padding: 0px;
+    margin-left: 15px;
+    font-size: 150%;
+    outline:none;
+    border: 0;
+    background-color: inherit;
+}

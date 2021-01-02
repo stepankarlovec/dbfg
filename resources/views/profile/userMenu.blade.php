@@ -12,7 +12,7 @@
                         <li class="list-inline-item"><a href="{{ route('showRated', $profile->id) }}">Hodnocené filmy</a></li>
                         <li class="list-inline-item"><a href="{{ route('showComments', $profile->id) }}">Komentáře</a></li>
                         <li class="list-inline-item"><a href="{{ route('showReactions', $profile->id) }}">Reakce</a></li>
-                        <li class="list-inline-item"><a href="#">Oblíbené filmy</a></li>
+                        <li class="list-inline-item"><a href="{{ route('showFavorite', $profile->id) }}">Oblíbené filmy</a></li>
                         @if($profile->id == auth()->user()->id)
                             | <li class="list-inline-item"><a class="text-secondary" href="{{ route('editProfile', $profile) }}">Upravit</a></li>
                         @endif

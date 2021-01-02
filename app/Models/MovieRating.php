@@ -24,8 +24,7 @@ class MovieRating extends Model
     protected $hidden = [
         'created_at', 'updated_at',
     ];
-    public function movie()
-    {
+    public function movie(){
         return $this->belongsTo(Movie::class);
     }
     public function ratings(){

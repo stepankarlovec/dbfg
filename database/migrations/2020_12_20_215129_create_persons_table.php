@@ -20,6 +20,7 @@ class CreatePersonsTable extends Migration
             $table->string('birth_place')->nullable();
             $table->text('bio')->nullable();
             $table->string('image')->nullable();
+            $table->integer('verified')->default(0);
             $table->timestamps();
         });
     }

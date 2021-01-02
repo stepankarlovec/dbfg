@@ -16,4 +16,7 @@ class Cast extends Model
     protected $hidden = [
         'created_at', 'updated_at',
         ];
+    public function movie(){
+        return $this->belongsTo(Movie::class);
+    }
 }

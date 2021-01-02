@@ -19,6 +19,9 @@ class ProfileController extends Controller
     public function reactions(Profile $profile){
         return view('profile.reactions', compact('profile'));
     }
+    public function favorite(Profile $profile){
+        return view('profile.favorite', compact('profile'));
+    }
     public function edit(Profile $profile){
         $this->authorize('update', $profile);
         return view('profile.edit', compact('profile'));

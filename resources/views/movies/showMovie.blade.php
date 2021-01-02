@@ -13,7 +13,11 @@
                 @endif
             @endauth
 
-            <h1 class="display-4">{{ $movie->name }}</h1>
+            <div class="d-flex">
+                <h1 class="display-4">{{ $movie->name }}</h1>
+                <button type="submit" id="favoriteButton">🖤</button>
+            </div>
+
             <div class="d-flex">
                 <p class="">{{ $movie->genre }}</p>
                 <p class="pl-2">{{ $year = date('Y', strtotime($movie->release_date)) }}</p>
@@ -120,9 +124,28 @@
             @endauth
     <div class="col-md-12">
         <hr></hr>
-        <h1 class="display-6">Komentáře:</h1>
         @if(count($comments)>0)
+        <h1 class="display-6">Komentáře:</h1>
+        @if(isset($commentExists))
+                <div class="d-inline-flex">
+                    <a class="font-weight-bolder commentName pb-1" href="/profile/{{ $commentExists->user->id }}">{{ $commentExists->user->name }}</a>
+                    <div class="pl-2 paddingT3">{{ $commentExists->user->ratings->where('movie_id', $movie->id)->first()->rate }} hvězd/y</div>
+                    <div class="pl-1">
+                        <button id="likeComment{{$commentExists->id}}" class="thumbbutton" type="submit">👍</button>
+                        <button id="dislikeComment{{$commentExists->id}}" class="thumbbutton" type="submit">👎</button>
+                    </div>
+                    @auth
+                            <div class="paddingT3 pl-2">
+                                <a href="{{ route('editComment', $movie->id) }}" class="text-dark">Upravit</a>
+                                <a href="{{ route('deleteComment', $movie->id) }}" class="text-danger pl-2">Odstranit</a>
+                            </div>
+                    @endauth
+                </div>
+                <p>{{ $commentExists->content }}</p>
+            @endif
         @foreach($comments as $comment)
+                @if(isset($commentExists) && $comment->id == $commentExists->id)
+                @else
             <div class="d-inline-flex">
                 <a class="font-weight-bolder commentName pb-1" href="/profile/{{ $comment->user->id }}">{{ $comment->user->name }}</a>
                 <div class="pl-2 paddingT3">{{ $comment->user->ratings->where('movie_id', $movie->id)->first()->rate }} hvězd/y</div>
@@ -136,23 +159,48 @@
                             <a href="{{ route('editComment', $movie->id) }}" class="text-dark">Upravit</a>
                             <a href="{{ route('deleteComment', $movie->id) }}" class="text-danger pl-2">Odstranit</a>
                         </div>
-                    @endif
+                    @endcan
                 @endauth
             </div>
                 <p>{{ $comment->content }}</p>
+                @endif
         @endforeach
-        @endif
+            @endif
     </div>
 </div>
     </div>
-
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+        @if($movieIsFavorite==!null)
+        $("#favoriteButton").html('❤️');
+        @else
+        $("#favoriteButton").html('🖤');
+        @endif
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+        });
+        $("#favoriteButton").click(function(){
+            var value = $("#favoriteButton").text();
+            if(value==="🖤"){
+                $("#favoriteButton").html('❤️');
+            }else{
+                $("#favoriteButton").html('🖤');
+            }
+            $.ajax({
+                url: "{{ route('movieFavorite', $movie->id) }}",
+                type:"GET",
+                data:{
+                },
+                success:function (response){
+                    if(response){
+                    }
+                }
+            });
+            location.reload();
+            return false;
         });
         @if(count($comments)>0)
             @foreach($comments as $comment)

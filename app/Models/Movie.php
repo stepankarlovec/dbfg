@@ -26,14 +26,20 @@ class Movie extends Model
     protected $hidden = [
         'validate','created_at', 'updated_at',
         ];
-    public function movieRating()
-    {
+
+    public function movieRating(){
         return $this->hasOne(MovieRating::class);
+    }
+    public function favoriteMovies(){
+        return $this->hasMany(FavoriteMovie::class);
     }
     public function comments(){
         return $this->hasMany(Comment::class);
     }
     public function rating(){
         return $this->hasMany(Rating::class);
+    }
+    public function casts(){
+        return $this->hasMany(Cast::class);
     }
 }

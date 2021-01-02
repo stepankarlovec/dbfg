@@ -15,6 +15,13 @@ use Image;
 class AdminController extends Controller
 {
     public function index(\App\Models\Movie $movie){
+        if(!Auth::check()){
+            redirect(route('login'));
+        }
+        if(!\auth()->user()->admin == 1){
+            redirect(route('login'));
+        }
+
         $movies = Movie::where('validate', 1)->paginate(10);
         $users = User::orderByDesc('id')->paginate(10);
 
@@ -65,7 +72,7 @@ class AdminController extends Controller
         $delRating = Rating::where('movie_id', $movie->id)->delete();
         $delMovRating = MovieRating::where('movie_id', $movie->id)->delete();
         $delMovie = Movie::where('id', $movie->id)->delete();
-        return route('adminLogin');
+        return redirect(route('adminApprove'));
     }
 
 }
