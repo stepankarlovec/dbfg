@@ -18,14 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style type="text/css">
-        .form-control-xs {
-            height: 30px;
-            width: 70%;
-            font-size: 14px;
-            border-bottom-right-radius: 0px;
-            border-top-right-radius: 0px;
-        }
+    <link href="{{ asset('css/customizeApp.css') }}" rel="stylesheet">
+    <style>
         .mybtn{
             height: 30px;
             width: 14%;
@@ -41,7 +35,9 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-lg">
+        <div id="page-container">
+            <div id="content-wrap">
+        <nav class="navbar sticky-top navbar-expand-md navbar-dark own-bg-purple shadow-lg">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -68,13 +64,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">Přihlásit se</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">Registrace</a>
                                 </li>
                             @endif
                         @else
@@ -104,9 +100,15 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="pb-5">
             @yield('content')
         </main>
+
+        <div class="footer">
+            <p>Coded with ❤️ by <a href="http://stepankarlovec.eu/">Stepan Karlovec</a> in <a href="https://laravel.com/">Laravel</a>.</p>
+        </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

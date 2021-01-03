@@ -7,6 +7,7 @@ use App\Models\Movie;
 use App\Models\Person;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Image;
 
@@ -25,12 +26,19 @@ class PersonController extends Controller
 
     public function edit(Person $person)
     {
-        return view('person.edit', compact('person'));
+        if(Auth::check()){
+            return view('person.edit', compact('person'));
+        }else{
+            return redirect(route('login'));
+        }
+
     }
 
     public function editPatch(Person $person, Request $request)
     {
-
+        if(!Auth::check()){
+            return redirect(route('login'));
+        }
         $this->validate($request, [
             'bio' => ['nullable', 'string'],
             'birth' => ['nullable', 'date'],

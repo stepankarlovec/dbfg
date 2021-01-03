@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+    <div class="container py-4">
         <div class="row">
             <div class="col-md-12">
                 <div class="d-flex">
-                    <a class="text-dark text-decoration-none" href="{{ route('showProfile', $profile->id) }}"><h1 class="display-5">{{ $profile->user->name }}</h1></a>
+                    <a class="text-white text-decoration-none" href="{{ route('showProfile', $profile->id) }}"><h1 class="display-5">{{ $profile->user->name }}</h1></a>
                 </div>
                 <div class="d-inline-flex">
                     <ul class="list-inline">

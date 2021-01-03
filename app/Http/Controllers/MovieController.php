@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\FavoriteMovie;
 use App\Models\Rating;
 use App\Models\MovieRating;
+use App\Models\SelectedMovies;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Movie;
@@ -19,12 +20,13 @@ use Illuminate\Support\Facades\DB;
 class MovieController extends Controller
 {
     public function index(){
+        $selectedMovies = SelectedMovies::with('movie')->get();
         $movies = Movie::orderByDesc('id')->where('validate', 1)->paginate(5, ['*'], 'pL');
         $bestRatedMovies = MovieRating::orderByDesc('average')->whereHas('movie', function ($query) {
             return $query->where('validate', '=', 1);
         })->paginate(5, ['*'], 'pR');
         $bestUsers = User::orderByDesc('points')->paginate(5, ['*'], 'bU');
-        return view('movies/mainMovies', compact('movies', 'bestRatedMovies', 'bestUsers'));
+        return view('movies/mainMovies', compact('movies', 'bestRatedMovies', 'bestUsers', 'selectedMovies'));
     }
     public function add(){
         return view('movies/addMovie');
@@ -251,11 +253,15 @@ class MovieController extends Controller
 
     }
     public function favorite(Movie $movie){
-        $result = FavoriteMovie::where(['movie_id' => $movie->id, 'user_id' => auth()->user()->id])->first();
-        if($result === null || !$result){
-            FavoriteMovie::create(['movie_id' => $movie->id, 'user_id' => auth()->user()->id]);
+        if(Auth::check()){
+            $result = FavoriteMovie::where(['movie_id' => $movie->id, 'user_id' => auth()->user()->id])->first();
+            if($result === null || !$result){
+                FavoriteMovie::create(['movie_id' => $movie->id, 'user_id' => auth()->user()->id]);
+            }else{
+                FavoriteMovie::where(['movie_id' => $movie->id, 'user_id' => auth()->user()->id])->first()->delete();
+            }
         }else{
-            FavoriteMovie::where(['movie_id' => $movie->id, 'user_id' => auth()->user()->id])->first()->delete();
+            return redirect(route('login'));
         }
     }
 

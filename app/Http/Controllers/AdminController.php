@@ -6,6 +6,7 @@ use App\Models\Cast;
 use App\Models\Movie;
 use App\Models\MovieRating;
 use App\Models\Rating;
+use App\Models\SelectedMovies;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,14 +15,16 @@ use Image;
 
 class AdminController extends Controller
 {
-    public function index(\App\Models\Movie $movie){
+    public function isAdmin(){
         if(!Auth::check()){
             redirect(route('login'));
         }
         if(!\auth()->user()->admin == 1){
             redirect(route('login'));
         }
-
+    }
+    public function index(\App\Models\Movie $movie){
+        $this->isAdmin();
         $movies = Movie::where('validate', 1)->paginate(10);
         $users = User::orderByDesc('id')->paginate(10);
 
@@ -31,13 +34,16 @@ class AdminController extends Controller
         return view('admin.movies', compact('movies', 'users', 'allMovies', 'allUsers', 'allRatings'));
     }
     public function edit(\App\Models\Movie $movie){
+        $this->isAdmin();
         return view('admin.edit', compact('movie'));
     }
     public function approve(){
+        $this->isAdmin();
         $movies = Movie::where('validate', 0)->paginate(10);
         return view('admin.approve', compact('movies'));
     }
     public function approveMovie(\App\Models\Movie $movie){
+        $this->isAdmin();
         if($movie->validate==0){
             Movie::where('id', $movie->id)->update(['validate' => 1]);
             return redirect(route('adminApprove'));
@@ -47,6 +53,7 @@ class AdminController extends Controller
         }
     }
     public function update(\App\Models\Movie $movie, Request $request){
+        $this->isAdmin();
         $data = \request()->validate([
             'name' => ['required', 'string', 'max:255'],
             'genre' => ['nullable','string', 'max:255'],
@@ -67,12 +74,25 @@ class AdminController extends Controller
         $movie->update($data);
         return redirect(route('indexAdmin'));
     }
-    public function delete(\App\Models\Movie $movie){
+    public function delete(Movie $movie){
+        $this->isAdmin();
         $delCasts = Cast::where('movie', $movie->id)->delete();
         $delRating = Rating::where('movie_id', $movie->id)->delete();
         $delMovRating = MovieRating::where('movie_id', $movie->id)->delete();
         $delMovie = Movie::where('id', $movie->id)->delete();
         return redirect(route('adminApprove'));
+    }
+    public function addToSelected(Movie $movie){
+        $this->isAdmin();
+        $result = SelectedMovies::where('movie_id', $movie->id)->first();
+        if($result==null){
+            SelectedMovies::create([
+                'movie_id' => $movie->id,
+                ]);
+        }else{
+            SelectedMovies::where('movie_id', $movie->id)->first()->delete();
+        }
+        return redirect(route('showMovie', $movie->id));
     }
 
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
+<div class="container py-4">
     <div class="row">
     <div class="col-md-4">
         <h1 class="display-6">Filmy:</h1>

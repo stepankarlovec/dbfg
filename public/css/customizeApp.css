@@ -1,0 +1,84 @@
+.form-control-xs {
+    height: 30px;
+    width: 70%;
+    font-size: 14px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.own-bg-purple{
+    background-color: #EF6F6C;
+}
+a{
+    color: #EEF36A;
+}
+a:hover{
+    color: #bcc154;
+}
+.jumbotron{
+    border-radius: 0px;
+    background-color: #26C485;
+    color: black;
+}
+.swag{
+    color: green;
+    background-color: #d01c1c;
+}
+body{
+    color: white;
+    background-color: #32322C;
+}
+.list-group-item{
+    background-color: #EF6F6C;
+}
+.selectedMovies{
+    margin: 0px;
+    border-radius:   3px;
+    border: 1px solid  #EF6F6C;
+}
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem;    /* Footer height */
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    background-color: #212121;
+    height: 50px;
+    width: 100%;
+    padding: 5px;
+    padding-top: 15px;
+    text-align: center;
+}
+.font-size-gay{
+    font-size: 20px;
+}
+hr{
+    background-color: white;
+    color: white;
+}
+.form-control{
+    background-color: #d25e5e;
+    color: white;
+}
+.form-control:focus{
+    background-color: #d25e5e;
+    color: white;
+}
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #373737;
+    opacity: 0.9; /* Firefox */
+}
+.hledat{
+    background-color: #efc5c5;
+}
+.hledat:focus{
+    background-color: #ec9d9d;
+}

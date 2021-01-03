@@ -4,9 +4,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
+            @auth
             @if($person->verified == 0)
                 <a class="text-secondary" href="{{ route('editPerson', $person->id) }}">Upravit</a>
             @endif
+            @endauth
             <div class="d-flex">
                 <h1 class="display-4">{{ $person->name }}</h1>
                 <img class="ml-5" src="../{{ $person->image }}" width="25%">

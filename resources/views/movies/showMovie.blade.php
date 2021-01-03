@@ -3,19 +3,22 @@
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset('css/movieView.css') }}" rel="stylesheet" >
-<div class="container">
+<div class="container py-4">
     <div class="row">
         <div class="col-md-6">
             @auth
                 @if(auth()->user()->admin==1)
                     <a href="{{ route('editMovie', $movie->id) }}" class="text-secondary">edit</a> |
-                    <a href="{{ route('deleteMovie', $movie->id) }}" class="text-danger">delete</a>
+                    <a href="{{ route('deleteMovie', $movie->id) }}" class="text-danger">delete</a> |
+                    <a href="{{ route('addToSelected', $movie->id) }}" class="text-primary">select</a>
                 @endif
             @endauth
 
             <div class="d-flex">
                 <h1 class="display-4">{{ $movie->name }}</h1>
+                @auth
                 <button type="submit" id="favoriteButton">🖤</button>
+                @endauth
             </div>
 
             <div class="d-flex">
@@ -126,7 +129,7 @@
         <hr></hr>
         @if(count($comments)>0)
         <h1 class="display-6">Komentáře:</h1>
-        @if(isset($commentExists))
+        @if(auth()->check() & isset($commentExists))
                 <div class="d-inline-flex">
                     <a class="font-weight-bolder commentName pb-1" href="/profile/{{ $commentExists->user->id }}">{{ $commentExists->user->name }}</a>
                     <div class="pl-2 paddingT3">{{ $commentExists->user->ratings->where('movie_id', $movie->id)->first()->rate }} hvězd/y</div>
@@ -136,7 +139,7 @@
                     </div>
                     @auth
                             <div class="paddingT3 pl-2">
-                                <a href="{{ route('editComment', $movie->id) }}" class="text-dark">Upravit</a>
+                                <a href="{{ route('editComment', $movie->id) }}" class="text-secondary">Upravit</a>
                                 <a href="{{ route('deleteComment', $movie->id) }}" class="text-danger pl-2">Odstranit</a>
                             </div>
                     @endauth
@@ -144,7 +147,7 @@
                 <p>{{ $commentExists->content }}</p>
             @endif
         @foreach($comments as $comment)
-                @if(isset($commentExists) && $comment->id == $commentExists->id)
+                @if(auth()->check() && isset($commentExists) && $comment->id == $commentExists->id)
                 @else
             <div class="d-inline-flex">
                 <a class="font-weight-bolder commentName pb-1" href="/profile/{{ $comment->user->id }}">{{ $comment->user->name }}</a>
@@ -156,7 +159,7 @@
                 @auth
                     @can('update', $comment)
                         <div class="paddingT3 pl-2">
-                            <a href="{{ route('editComment', $movie->id) }}" class="text-dark">Upravit</a>
+                            <a href="{{ route('editComment', $movie->id) }}" class="text-secondary">Upravit</a>
                             <a href="{{ route('deleteComment', $movie->id) }}" class="text-danger pl-2">Odstranit</a>
                         </div>
                     @endcan

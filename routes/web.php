@@ -56,6 +56,7 @@ Route::get('/admin/{movie}/edit', [App\Http\Controllers\AdminController::class, 
 Route::patch('/admin/{movie}/edit', [App\Http\Controllers\AdminController::class, 'update'])->name('updateMovie')->middleware('auth', 'admin');
 Route::get('/admin/approve', [App\Http\Controllers\AdminController::class, 'approve'])->name('adminApprove')->middleware('auth', 'admin');
 Route::get('/admin/{movie}/approve', [App\Http\Controllers\AdminController::class, 'approveMovie'])->name('adminApproveMovie')->middleware('auth', 'admin');
+Route::get('/admin/{movie}/select', [App\Http\Controllers\AdminController::class, 'addToSelected'])->name('addToSelected')->middleware('auth', 'admin');
 
 
 

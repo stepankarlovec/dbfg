@@ -446,6 +446,14 @@ h6,
   font-weight: 300;
   line-height: 1.2;
 }
+.display-6-sm {
+    font-size: 2.1rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+.text-black{
+    color:black;
+}
 
 hr {
   margin-top: 1rem;
@@ -4939,11 +4947,19 @@ input[type=button].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: #778377;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  border: 1px solid rgba(52, 42, 42, 0.12);
   border-radius: 0.25rem;
+    color: black;
 }
+.card a{
+    color: #EEF36A;
+}
+.card a:hover{
+    color: #bcc154;
+}
+
 
 .card > hr {
   margin-right: 0;
@@ -5002,7 +5018,7 @@ input[type=button].btn-block {
 .card-header {
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
@@ -5745,6 +5761,13 @@ a.badge-dark.focus {
   padding: 0.75rem 1.25rem;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.125);
+}
+.list-group-item-swag {
+    position: relative;
+    display: block;
+    padding: 0.75rem 1.25rem;
+    background-color: #26C485;
+    border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .list-group-item:first-child {
@@ -10698,7 +10721,7 @@ a.text-primary:focus {
 }
 
 .text-secondary {
-  color: #6c757d !important;
+  color: #26C485 !important;
 }
 
 a.text-secondary:hover,

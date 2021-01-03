@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container py-4">
     @auth
         <div class="row">
     <form method="post" class="col-md-6" enctype="multipart/form-data" action="{{ route('addMovie') }}">

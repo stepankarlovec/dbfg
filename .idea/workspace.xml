@@ -5,28 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8434ea7-b3ef-4dce-a103-d079fa4789ed" name="Default Changelist" comment="Administrace, začátek SearchController.php">
-      <change afterPath="$PROJECT_DIR$/public/images/601542638e03ea371c74a185ef4651ed.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/fe98e9a49116e6dcadf2957593ae101f.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/person/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/profile/favorite.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/SelectedMoviesController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/SelectedMovies.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_155509_create_selected_movies_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/customizeApp.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MovieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MovieController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PersonController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PersonController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProfileController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Cast.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Cast.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/FavoriteMovie.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/FavoriteMovie.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Movie.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Movie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/MovieRating.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/MovieRating.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_20_215129_create_persons_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_20_215129_create_persons_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_01_205108_create_favorite_movies_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_01_205108_create_favorite_movies_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/movieView.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/movieView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/approve.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/approve.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/movies/addMovie.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/movies/addMovie.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/movies/comment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/movies/comment.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/movies/mainMovies.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/movies/mainMovies.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/movies/showMovie.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/movies/showMovie.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/person/showPerson.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/person/showPerson.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/profile/userMenu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/profile/userMenu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/search/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/search/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -230,7 +230,9 @@
       <workItem from="1609413347054" duration="9948000" />
       <workItem from="1609504882908" duration="20168000" />
       <workItem from="1609588718036" duration="965000" />
-      <workItem from="1609620854868" duration="7648000" />
+      <workItem from="1609620854868" duration="10010000" />
+      <workItem from="1609676547701" duration="10312000" />
+      <workItem from="1609714585556" duration="1830000" />
     </task>
     <task id="LOCAL-00001" summary="Administrace, začátek SearchController.php">
       <created>1609203578103</created>
